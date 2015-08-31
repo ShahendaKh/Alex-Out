@@ -1,0 +1,77 @@
+<div class="header">
+    <div class="container">
+    	<div class="logo">
+    	<%= link_to image_tag("HBBB.jpg", :alt => "header"), root_url , class:"active" %>
+    	</div>
+    	<div>
+         <ul>
+         		<% if user_signed_in? %>
+					<li id="linki"><%= link_to "Add", new_restaurant_path, class:"active"%></li>
+					<li id="linki"><%= link_to "Account", edit_user_registration_path%></li>
+					<li id="linki"><%= link_to "Sign Out", destroy_user_session_path, class:"active", :method => :delete%></li>
+					<%else%>
+					<li id="linki"><%= link_to "Sign Up", new_user_registration_path, class:"active"%></li>
+					<li id="linki"><%= link_to "Sign In", new_user_session_path, class:"active"%></li>
+					<%end%>
+
+         </ul>
+
+    	</div>
+    </br>
+    </br>
+    </br>
+    </br>
+    	<div style="float: right">
+        <%= form_tag search_restaurants_path, method: :get, class:"navbar-form navbar-right", role:"search" do %>
+            <p>
+              <%= text_field_tag :search, params[:search], class:"form-control" %>
+              <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+            </p>
+        <%end%>
+    	</div>
+
+    </div>
+
+</div>
+
+<style>
+#linki{
+	font-family: 'Papyrus';
+	font-weight: bold;
+	font-size: 150%;
+	color: #aa6b46;
+}
+#linki a {
+
+	color: #9d694a;
+  
+}
+.btn-default {
+	font-family: 'Young & Beautiful';
+    color: #337ab7;
+}
+.header{
+	/* background:#50d3c5;*/
+	/*background: #83bacf;*/
+	background: #587ecc;
+	width: 100%;
+	top:0;
+	position: fixed;
+	z-index: 2;
+}
+.logo{
+	float: left;
+}
+li {
+	list-style: none;
+	
+	float: right;
+	margin-left: 10px;  
+	padding-top: 35px;  
+	padding-right: 60px;
+}
+.nav{
+	 float: right;
+}
+</style>
+

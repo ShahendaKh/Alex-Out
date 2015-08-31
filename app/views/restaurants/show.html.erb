@@ -1,0 +1,78 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-4">
+				<%=image_tag @restaurant.image.url(:medium) %>
+				<hr>
+				<div class="star-rating" data-score= <%= @avgreview %>></div>
+				  <em><b><%= "#{@reviews.length} reviews" %></b></em>
+				<div class="table-responsive">
+					<table class="table">
+						<tbody>
+							</br>
+							<tr>
+							  <td><strong>Tags:</strong></td>
+                              <td><%= @restaurant.tag %></td>
+                            </tr>
+                            </br>
+                           <!-- <tr>
+							  <td><strong>Rating:</strong></td>
+                              <td><%= @restaurant.rating %></td>
+                            </tr>-->
+						</tbody>
+					</table>
+					<%= link_to "Write a review", new_restaurant_review_path(@restaurant)%>
+				</div>
+			</div>
+         
+         <div class="col-md-7 col-md-offset-1">
+         	<h1 class="review_title"><%= @restaurant.name%> </h1>
+         	<p><%= @restaurant.description%></p>
+           <% if @reviews.blank?%>
+           <h3>No Reviews yet , please be the first to add a review</h3>
+           <%= link_to "Write a review", new_restaurant_review_path(@restaurant), class: "btn btn/danger" %>
+          <% else %>
+          <% @reviews.each do |review|%>
+          <div class="reviews">
+          	<div class="star-rating" data-score= <%= review.rating %> > </div>
+          </br>
+            <p><%= review.comment %></p>
+          </div>
+         <%end%>
+         <%end%>
+		</div>
+
+	</div>
+	<div id="down">
+        <% if user_signed_in? %>
+            <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+        <%end%>
+        <%= link_to 'Back', restaurants_path %>
+	</div>
+
+</div>
+</div>
+
+<style>
+.panel{
+	/*background: #f6daed;*/
+	background: #f9ceea;
+}
+
+
+.down{
+	padding-left: 500px;
+}
+.table{
+	color:#337ab7;
+}
+</style>
+<script> 
+$('.star-rating').raty({
+	path: '/assets/',
+	readOnly: true,
+	score: function() {
+		return $(this).attr('data-score');
+	}
+});
+</script>
